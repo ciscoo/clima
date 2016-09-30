@@ -16,7 +16,7 @@ apply plugin: 'spring-boot'
 
 jar {
 	baseName = 'clima'
-	version = '0.0.1-SNAPSHOT'
+	version = '0.0.1'
 }
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -25,6 +25,8 @@ repositories {
 	mavenCentral()
 }
 
+ext['thymeleaf.version'] = '3.0.2.RELEASE'
+ext['thymeleaf-layout-dialect.version'] = '2.0.3'
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
