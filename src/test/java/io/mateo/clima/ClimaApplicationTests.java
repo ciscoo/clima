@@ -1,4 +1,4 @@
-package io.mateo;
+package io.mateo.clima;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
