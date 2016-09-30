@@ -6,7 +6,7 @@ buildscript {
 		mavenCentral()
 	}
 	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
 	}
 }
 
@@ -29,7 +29,14 @@ ext['thymeleaf.version'] = '3.0.2.RELEASE'
 ext['thymeleaf-layout-dialect.version'] = '2.0.3'
 
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
-	compile('org.springframework.boot:spring-boot-starter-web')
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+	compile 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	compile 'org.springframework.boot:spring-boot-starter-web'
+	compile 'org.springframework.boot:spring-boot-devtools'
+    compile 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+	compile 'org.webjars.npm:semantic-ui-css:2.2.4'
+	testCompile 'org.springframework.boot:spring-boot-starter-test'
+}
+
+bootRun {
+    addResources = true
 }
