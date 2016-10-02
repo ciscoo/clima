@@ -33,6 +33,7 @@ dependencies {
 	compile 'org.springframework.boot:spring-boot-starter-web'
 	compile 'org.springframework.boot:spring-boot-devtools'
     compile 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+	compile 'com.google.code.gson:gson:2.7'
 	compile 'org.webjars.npm:semantic-ui-css:2.2.4'
 	testCompile 'org.springframework.boot:spring-boot-starter-test'
 }
