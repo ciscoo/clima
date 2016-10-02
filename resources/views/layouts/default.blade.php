@@ -37,9 +37,7 @@
     </div>
 </div>
 <div class="pusher">
-    <div class="ui main text container">
-        @yield('content')
-    </div>
+    @yield('content')
     <div class="ui inverted vertical footer segment">
         <div class="ui center aligned container">
             <div class="ui stackable inverted divided grid">

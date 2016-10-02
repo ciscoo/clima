@@ -11,6 +11,4 @@
 |
 */
 
-$app->get('/', function ()  {
-    return view('pages.index');
-});
+$app->get('/', 'WundergroundController@index');
