@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Services\WundergroundService;
+use \Illuminate\View\View;
 
+/**
+ * Class WundergroundController
+ * @package App\Http\Controllers
+ */
 class WundergroundController extends Controller
 {
     /**
@@ -13,6 +18,7 @@ class WundergroundController extends Controller
 
     /**
      * HomeController constructor.
+     *
      * @param WundergroundService $wundergroundService
      */
     public function __construct(WundergroundService $wundergroundService)
@@ -20,17 +26,34 @@ class WundergroundController extends Controller
         $this->wundergroundService = $wundergroundService;
     }
 
-    public function currentConditions(string $state, string $city)
+    /**
+     * Returns a view with the current conditions for a given location.
+     *
+     * @param string $location
+     * @return View
+     * @internal param string $state
+     * @internal param string $city
+     */
+    public function currentConditions(string $location) : View
     {
-        return $this->wundergroundService->currentForecastFor($state, $city);
-        return response()->view()->width();
+        list($city, $state) = explode(",", $location);
+        $data = ['conditions' => $this->wundergroundService->currentForecastFor("$city, $state")];
+
+        return view('pages.conditions', $data);
     }
 
-    public function index() {
-        $forecast = $this->wundergroundService->currentForecastFor("WI", "Racine");
-        return view('pages.index')
-            ->with('city', 'Racine')
-            ->with('state', 'WI')
-            ->with('forecast', $forecast);
+    /**
+     * Handles the index page, defaults to Racine, WI for the location.
+     *
+     * @return View
+     */
+    public function index() : View
+    {
+        $data = [
+            'forecast' => $this->wundergroundService->currentForecastFor("Racine, WI"),
+            'condition' => $this->wundergroundService->currentConditionsFor("Racine, WI")
+        ];
+
+        return view('pages.index', $data);
     }
 }
