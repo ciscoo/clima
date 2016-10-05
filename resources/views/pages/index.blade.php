@@ -6,7 +6,9 @@
     <div class="ui container">
         <div class="ui grid">
             <div class="sixteen wide column">
-                <h2 class="ui dividing header">{{ $city }}, {{ $state }}</h2>
+                <h2 class="ui dividing header">
+                    {{ $condition['current_observation']['display_location']['full'] }}
+                </h2>
             </div>
         </div>
         <div class="ui grid">
@@ -18,10 +20,10 @@
                 <div class="ui one statistics">
                     <div class="statistic">
                         <div class="value">
-                            <i class="sun icon"></i> 64&deg;
+                            <img src="{{ $condition['current_observation']['icon_url'] }}" alt=""> {{ $condition['current_observation']['temp_f'] }}&deg;F
                         </div>
                         <div class="label">
-                            Overcast - Feels like 50&deg;
+                            {{ $condition['current_observation']['weather'] }} - Feels like {{ $condition['current_observation']['feelslike_f'] }}&deg;F
                         </div>
                     </div>
                     <div class="statistic">
