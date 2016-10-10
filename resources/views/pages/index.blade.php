@@ -7,23 +7,23 @@
         <div class="ui grid">
             <div class="sixteen wide column">
                 <h2 class="ui dividing header">
-                    {{ $condition['current_observation']['display_location']['full'] }}
+                    {{ $locationName }}
                 </h2>
             </div>
         </div>
         <div class="ui grid">
             <div class="eight wide column">
-                <img src="http://placehold.it/600x400" alt="">
+                <img src="{{ $radarImage }}">
             </div>
             <div class="two wide column"></div>
             <div class="six wide column">
                 <div class="ui one statistics">
                     <div class="statistic">
                         <div class="value">
-                            <img src="{{ $condition['current_observation']['icon_url'] }}" alt=""> {{ $condition['current_observation']['temp_f'] }}&deg;F
+                            <img src="{{ $currentObserIcon }}" alt=""> {{ $temperature }}&deg;F
                         </div>
                         <div class="label">
-                            {{ $condition['current_observation']['weather'] }} - Feels like {{ $condition['current_observation']['feelslike_f'] }}&deg;F
+                            {{ $currentObserWeather }} - Feels like {{ $feelsLike }}&deg;F
                         </div>
                     </div>
                     <div class="statistic">
@@ -57,7 +57,7 @@
             <div class="sixteen wide column">
                 <table class="ui celled padded table" style="border: none;">
                     <tbody>
-                    @foreach($forecast['forecast']['txt_forecast']['forecastday'] as $forecast)
+                    @foreach($forecasts as $forecast)
                         <tr>
                             <td><h2 class="ui center aligned header">{{ $forecast['title'] }}</h2></td>
                             <td class="single line" style="border-left: none"><img src="{{ $forecast['icon_url'] }}" alt="{{ $forecast['icon'] }}"></td>
