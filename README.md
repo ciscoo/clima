@@ -14,6 +14,8 @@ The following system requirements must be satisfied:
 
 In addition to the requirements above, you will also need to have [Composer](https://getcomposer.org/) installed on your local system.
 
+Finally, even though the prerequisites state PHP version >= 5.6.4, we use PHP 7 features such as scalar types and return types.
+
 ### Configuration
 You will find a `.env.example` file, rename or make a copy to `.env`. You **must** set the `WUNDERGROUND_API_KEY` environment variable with your own key. You can obtain a key [here](https://www.wunderground.com/weather/api/d/pricing.html) and it must be at least the **cumulus** plan.
 
