@@ -34,10 +34,21 @@ class WundergroundController extends Controller
      * @internal param string $stateK
      * @internal param string $city
      */
-    public function currentConditions(string $location) : View
+    public function currentConditions(string $location): View
     {
         list($city, $state) = explode(",", $location);
-        $data = ['conditions' => $this->wundergroundService->currentForecastFor("$city, $state")];
+        $json = $this->wundergroundService->conditionsAndForecastAndRadarFor($city, $state, false);
+        $radarImage = $this->wundergroundService->currentRadarFor("$city, $state", true);
+
+        $data = [
+            'locationName' => $json['current_observation']['display_location']['full'],
+            'temperature' => $json['current_observation']['temp_f'],
+            'feelsLike' => $json['current_observation']['feelslike_f'],
+            'currentObserIcon' => $json['current_observation']['icon_url'],
+            'currentObserWeather' => $json['current_observation']['weather'],
+            'forecasts' => $json['forecast']['txt_forecast']['forecastday'],
+            'radarImage' => $radarImage
+        ];
 
         return view('pages.conditions', $data);
     }
@@ -47,9 +58,9 @@ class WundergroundController extends Controller
      *
      * @return View
      */
-    public function index() : View
+    public function index(): View
     {
-        $json = $this->wundergroundService->conditionsAndForecastAndRadarFor("Racine, WI");
+        $json = $this->wundergroundService->conditionsAndForecastAndRadarFor("Racine, WI", false);
         $radarImage = $this->wundergroundService->currentRadarFor("Racine, WI", true);
 
         $data = [

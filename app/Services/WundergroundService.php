@@ -11,13 +11,15 @@ use GuzzleHttp\Client;
 class WundergroundService
 {
     /**
-     * HTTP client.
+     * HTTP client that makes the necessary requests to Wunderground's API
+     *
      * @var Client
      */
     private $client;
 
     /**
      * WundergroundService constructor.
+     *
      * @param Client $client
      */
     public function __construct(Client $client)
@@ -43,22 +45,13 @@ class WundergroundService
     }
 
     /**
-     * Gets the current conditions for a given location.
+     * Gets the current radar image for a given location. Can optional specify
+     * whether or not the radar image should be animated.
      *
      * @param string $location
-     * @return array
-     * @internal param string $city
-     * @internal param string $state
+     * @param bool $animated
+     * @return string The radar image URL
      */
-    public function currentConditionsFor(string $location): array
-    {
-        list($city, $state) = explode(",", $location);
-        $endpoint = str_replace(["{state}", "{city}"], [$state, $city], env('WUNDERGROUND_API_CONDITION'));
-        $json = $this->client->get($endpoint)->getBody();
-
-        return \GuzzleHttp\json_decode($json, true);
-    }
-
     public function currentRadarFor(string $location, $animated = false): string
     {
         list($city, $state) = explode(",", $location);
@@ -68,6 +61,19 @@ class WundergroundService
         return $endpoint;
     }
 
+    /**
+     * This is where the magic happens.
+     *
+     * You are able to makes calls for all of the features Wunderground offers. For example, if you wanted
+     * alerts, almanac, and astronomy, make the following call:
+     *
+     * $wundergroundService->alertsAndAlmanacAndAstronomyFor($location);
+     *
+     * You chain the features you want by using `And`
+     * @param string $name
+     * @param array $arguments
+     * @return array
+     */
     public function __call(string $name, array $arguments): array
     {
         $forecast = false;
